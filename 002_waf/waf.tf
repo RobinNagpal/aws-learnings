@@ -18,7 +18,7 @@ variable "environment" {
 
 
 resource "aws_s3_bucket" "www" {
-  bucket = "aws.jomo.dev"
+  bucket = "aws.fomo.dev"
   acl    = "public-read"
   policy = <<-POLICY
     {
@@ -28,7 +28,7 @@ resource "aws_s3_bucket" "www" {
         "Effect": "Allow",
         "Principal": "*",
         "Action": ["s3:GetObject"],
-        "Resource": ["arn:aws:s3:::aws.jomo.dev/*"]
+        "Resource": ["arn:aws:s3:::aws.fomo.dev/*"]
       }]
     }
     POLICY
@@ -44,7 +44,7 @@ resource "aws_s3_bucket" "www" {
 }
 
 resource "aws_route53_zone" "main" {
-  name = "aws.jomo.dev"
+  name = "aws.fomo.dev"
 
   tags = {
     Environment = var.environment
@@ -54,7 +54,7 @@ resource "aws_route53_zone" "main" {
 
 resource "aws_route53_record" "main-ns" {
   zone_id = aws_route53_zone.main.zone_id
-  name    = "aws.jomo.dev"
+  name    = "aws.fomo.dev"
   type    = "A"
   alias {
     name                   = aws_s3_bucket.www.website_endpoint

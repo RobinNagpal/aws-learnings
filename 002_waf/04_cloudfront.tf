@@ -1,4 +1,4 @@
-resource "aws_cloudfront_distribution" "s3_distribution" {
+resource aws_cloudfront_distribution s3_distribution {
   origin {
     domain_name = aws_s3_bucket.www.bucket_regional_domain_name
     origin_id   = local.s3_origin_id
@@ -52,8 +52,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    cloudfront_default_certificate = false
     acm_certificate_arn = aws_acm_certificate.cert.arn
     ssl_support_method = "sni-only"
   }
+
+  web_acl_id = aws_wafv2_web_acl.aws_waf_acl.arn
 }

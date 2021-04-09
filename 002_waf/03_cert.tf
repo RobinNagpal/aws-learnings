@@ -2,7 +2,6 @@ resource "aws_acm_certificate" "cert" {
   domain_name       = "aws.tutelage.dev"
   validation_method = "DNS"
 
-  subject_alternative_names = ["tutelage.dev"]
   tags = {
     Environment = "prod"
   }

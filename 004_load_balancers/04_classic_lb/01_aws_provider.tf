@@ -5,6 +5,11 @@ terraform {
       version = "~> 3.0"
     }
   }
+  backend "s3" {
+    bucket = "aws-learnings-robin-nagpal"
+    key    = "terraform-state/004_load_balancers/04_classic_lb"
+    region = "us-east-1"
+  }
 }
 
 
